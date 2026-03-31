@@ -1,133 +1,139 @@
-# ♻️ Waste2Worth 
+# Food Waste Management System - Project Documentation
 
-Waste2Worth Exchange is a full-stack, AI-powered web application designed to bridge the gap between food surplus and food scarcity. It connects food donors (like restaurants and individuals) with organizations in need (like shelters and food banks) and volunteer transporters, ensuring that edible food is consumed, usable scraps are repurposed, and waste is minimized.
+![Hero Banner](public/hero-banner.png)
 
-![Waste2Worth](https://img.shields.io/badge/Project-Waste2Worth-53b889?style=flat&logo=recycle&logoColor=white)
-![Sustainability](https://img.shields.io/badge/Focus-Sustainability-2e7d32?style=flat&logo=leaf&logoColor=white)
-![Circular Economy](https://img.shields.io/badge/Concept-Circular_Economy-d4a017?style=flat)
-![Community](https://img.shields.io/badge/Community-Donors_%7C_NGOs_%7C_Volunteers-1e88e5?style=flat)
+## 🌟 Executive Summary (Abstract)
 
-
-
-
+**The Food Waste Management System** (formerly Waste2Worth) is a state-of-the-art, AI-powered platform designed to bridge the gap between food surplus and community need. By connecting **Donors** (restaurants, individuals), **Organizations** (NGOs, shelters), and **Volunteers** (transporters), the system creates a high-efficiency circular economy. Leveraging **Google Gemini AI** for intelligent food categorization and **Google Maps** for real-time tracking, this application transforms surplus food into hope, reducing environmental impact while nourishing the community.
 
 ---
 
-## 🌏Overview
+## 🛠️ Advanced Tech Stack & Architectural Overview
 
-Every year, tons of perfectly good food go to waste. At the same time, many people in our communities face food insecurity. Waste2Worth tackles this problem head-on by creating a seamless, community-driven platform to redirect surplus food, nourish lives, and build a more sustainable future.
+The project is built on a **modern, type-safe full-stack architecture** (Next.js 15) ensuring high performance, security, and scalability.
 
-The platform uses generative AI to intelligently categorize donations, ensuring that food is directed to its best possible use—whether for human consumption, animal feed, or compost.
+### Core Technologies
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router & Server Actions)
+- **Runtime**: [Node.js](https://nodejs.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict Mode)
+- **Database**: [MongoDB](https://www.mongodb.com/) (ORM: [Mongoose](https://mongoosejs.com/))
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/) (JWT-based Credentials Provisoner)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Radix UI](https://www.radix-ui.com/)
+- **State Management**: [React 18](https://react.dev/) Hooks (useState, usePathname, etc.)
 
-## ⭐ Features
+### AI & API Implementations
+- **AI Engine**: [Google Genkit](https://firebase.google.com/docs/genkit) powered by `google-genai` (**Gemini Flash/Vision**)
+- **Maps API**: [Google Maps JavaScript API](https://developers.google.com/maps) (via `@vis.gl/react-google-maps`)
+- **Cloud Assets**: [Firebase](https://firebase.google.com/) for additional ecosystem integrations.
 
--   **Three User Roles:** Users can sign up as a **Donor**, **Organization**, or **Volunteer**.
--   **AI-Powered Donation Categorization:** When a donor lists an item, our AI (powered by Google's Gemini model) analyzes the details and photo to classify it into one of three tiers:
-    -   **Edible:** Safe for human consumption.
-    -   **Usable:** Suitable for animal feed or other non-human uses.
-    -   **Compost:** Biodegradable scraps for composting.
--   **Interactive Dashboard:** A central hub for all users to manage their activities.
-    -   **Donors:** Can add new donations and track their donation history and impact.
-    -   **Organizations:** Can view and claim available donations from a list or an interactive map.
-    -   **Volunteers:** Can view claimed donations and schedule pickups to transport them.
--   **Community Feed:** A social space for users to share updates, success stories, and photos, fostering a sense of community.
--   **Gamification & Rewards:** Users earn badges and level up for their contributions, encouraging engagement.
--   **Responsive Design:** Fully functional and accessible on both desktop and mobile devices.
-
-## 🛠️ Tech Stack & Architecture
-
-### Frontend
-
-| Category          | Technology                                      |
-| ----------------- | ----------------------------------------------- |
-| Framework         | **Next.js 15** (with App Router)                |
-| Language          | **TypeScript**                                  |
-| UI Library        | **React**                                       |
-| Component Library | **ShadCN UI**                                   |
-| Styling           | **Tailwind CSS**                                |
-| Icons             | **Lucide React**                                |
-| Forms             | **React Hook Form** & **Zod**                   |
-| Mapping           | **`@vis.gl/react-google-maps`**                 |
-
-### Backend (Server-side Logic & Database)
-
-| Category              | Technology                                      |
-| --------------------- | ----------------------------------------------- |
-| Runtime               | **Node.js** (via Next.js)                       |
-| Server-side Functions | **Next.js Server Actions**                      |
-| Generative AI         | **Genkit** with the Google AI Plugin            |
-| Database              | **Firebase Firestore**                          |
-| Authentication        | **Firebase Authentication**                     |
 ---
 
-## 🗂️ Project Structure
+## 🚀 Key Functional Modules
 
-```
-/
-├── src/
-│   ├── app/                # Next.js App Router: pages, layouts, and route handlers.
-│   │   ├── dashboard/      # Routes and layouts for the authenticated user dashboard.
-│   │   ├── login/          # Login and Sign-up page.
-│   │   ├── globals.css     # Global styles and Tailwind CSS theme configuration.
-│   │   └── page.tsx        # The main landing page.
-│   │
-│   ├── ai/                 # All Genkit-related code.
-│   │   ├── flows/          # Genkit flows that orchestrate AI tasks.
-│   │   └── genkit.ts       # Genkit configuration and initialization.
-│   │
-│   ├── components/         # Reusable React components.
-│   │   ├── layout/         # Components for overall site structure (Header, Footer, Nav).
-│   │   ├── community/      # Components for the community feed.
-│   │   ├── donations/      # Components related to donations (Cards, Dialogs).
-│   │   └── ui/             # Core ShadCN UI components.
-│   │
-│   ├── hooks/              # Custom React hooks (e.g., useCurrentUser, useToast).
-│   │
-│   ├── lib/                # Utility functions, type definitions, and placeholder data.
-│   │   ├── placeholder-data.ts # Mock data used for development.
-│   │   ├── types.ts        # Core TypeScript type definitions.
-│   │   └── utils.ts        # General utility functions (e.g., cn for classnames).
-│
-├── public/                 # Static assets like images and favicons.
-├── .env                    # For local environment variables (use .env.local).
-├── next.config.ts          # Next.js configuration file.
-└── tailwind.config.ts      # Tailwind CSS configuration.
+### 1. AI-Powered Smart Categorization
+Integrated with **Google Gemini**, the system analyzes uploaded food photos and descriptions to automatically categorize donations into three distinct tiers:
+- 🍱 **Edible**: High-quality surplus for human consumption (Shelters, Kitchens).
+- 🐾 **Usable**: Non-food grade, suitable for animal feed or livestock.
+- ♻️ **Compost**: Organic waste for community gardens and local agriculture.
 
-```
+### 2. Role-Based Dynamic Dashboards
+Secure, customized experiences for three distinct user roles:
+- **Donor**: Add donations, track listing status, view individual impact.
+- **Organization**: Claim available donations, manage claimed items, verify delivery.
+- **Volunteer**: Browse claimed donations, schedule pickups, earn XP and rewards.
+
+### 3. Real-Time Interactive Tracking
+An integrated **Google Map** view that visualizes available food donations, allowing Organizations to find nearby resources and Volunteers to optimize their pickup routes.
+
+### 4. Gamified Rewards & XP System
+Built-in mechanics to drive engagement:
+- **XP (Experience Points)**: Awarded for active participation (donating, claiming, transporting).
+- **Levels**: Milestone-based level-up system (Level 1 to Max Level).
+- **Badges**: Unlockable achievements (e.g., *First Donation*, *Eco-Warrior*, *Helping Hand*).
+
 ---
 
-## ⚙️ Local Setup and Installation
+## 💎 Design Standards & Best Practices
 
-Follow these steps to get the project running on your local machine.
+The codebase adheres to industry-standard clean code principles:
+- **Server-Side Excellence**: Extensive use of **Next.js Server Actions** for database mutations to minimize client-side bundle size.
+- **Zod-Powered Validation**: Hardened AI flows and form inputs using **Zod schema validation**.
+- **Component Composition**: Modular UI primitives built on Radix UI for accessibility (A11y) and premium polish.
+- **Micro-Animations**: Smooth transitions using Tailwind CSS and Radix animations for a premium user experience.
+- **Glassmorphic UI**: Modern aesthetic with frosted glass headers and elegant card-based layouts.
 
-### 📦 Prerequisites
--   Node.js (v18 or later)
--   npm or yarn
+---
 
-### 1. Clone the Repository
+## 🧪 Comprehensive Test Case Report
 
-```bash
-git clone https://github.com/your-username/waste2worth-exchange.git
-cd waste2worth
+To ensure system reliability, the following end-to-end flows are used for verification:
+
+### **TC-01: AI Vision & Categorization Flow**
+- **Objective**: Verify AI correctly identifies food type from a photo.
+- **Role**: Donor
+- **Steps**:
+    1. Navigate to `/dashboard/donate`.
+    2. Upload a clear photo of "Fresh Vegetables".
+    3. Enter description and submit.
+- **Expected Result**: System returns "Edible" category with a valid technical reasoning.
+
+### **TC-02: Organization Claims Management**
+- **Objective**: Verify NGOs can discover and claim nearby food.
+- **Role**: Organization
+- **Steps**:
+    1. Browse the Interactive Map on the Dashboard.
+    2. Select an "Available" card.
+    3. Click "Claim donation".
+- **Expected Result**: System updates donation status to "claimed" and moves it to the "My Claims" list.
+
+### **TC-03: Volunteer Logistics & XP Awarding**
+- **Objective**: Verify volunteers can complete deliveries and earn rewards.
+- **Role**: Volunteer
+- **Steps**:
+    1. View "Claimed" items awaiting pickup.
+    2. Click "Schedule Pickup & Complete".
+- **Expected Result**: Status changes to "completed", 50 XP is added to the user profile, and Level Progress fills up.
+
+---
+
+## 🛠️ Installation & Setup Guide
+
+### 1. Prerequisites
+- **Node.js**: v18.x or later
+- **MongoDB**: Local instance or MongoDB Atlas
+- **API Keys**: Google Cloud (Maps API) & Google AI Studio (Gemini API)
+
+### 2. Environment Configuration
+Create a `.env` file in the root directory and populate it:
+```env
+# Google AI Studio
+GEMINI_API_KEY=your_gemini_api_key
+
+# Google Cloud Maps
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_maps_api_key
+
+# MongoDB
+MONGODB_URI=mongodb://localhost:27017/FoodWasteManagementSystem
+
+# NextAuth
+NEXTAUTH_SECRET=your_auth_secret
+NEXTAUTH_URL=http://localhost:9002
 ```
-2. **Install Dependencies**
 
+### 3. Run Locally
 ```bash
-   npm install
-```
+# Install dependencies
+npm install
 
-3. **Set Up Environement Variables**
-Create a file named .env.local in the root of the project and add the following environment variables. These are required for the AI and Maps features to work.
-
-```bash
-# Get this from the Google AI Studio
-GEMINI_API_KEY=your_google_ai_api_key
-
-# Get this from the Google Cloud Console
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+# Run in Development mode
+npm run dev -p 9002
 ```
-4. Run the Development Server
-```bash
-npm run dev
-```
-The application will be available at http://localhost:9002
+*The app will be available at [http://localhost:9002](http://localhost:9002)*
+
+---
+
+## 📜 License & Acknowledgments
+Distributed under the **MIT License**. This project was created with a vision for zero food waste and a hunger-free community.
+
+---
+*Developed by the Food Waste Management Team. Transform Surplus Into Hope.*

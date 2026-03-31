@@ -14,7 +14,7 @@ export default function LoginPage() {
             <Link href="/" className="flex items-center justify-center space-x-2 mb-4">
                 <Icons.logo className="h-8 w-8 text-primary" />
                 <span className="font-bold font-headline text-2xl">
-                    Waste2Worth Exchange
+                    Food Waste Management System
                 </span>
             </Link>
             <h1 className="text-3xl font-bold font-headline">Join the Movement</h1>

@@ -74,7 +74,7 @@ export default function Home() {
           <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 text-center md:text-left">
               <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">
-                Waste2Worth Exchange
+                Food Waste Management System
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground font-medium">
                 Turn Surplus Into Hope. <br />

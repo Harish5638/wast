@@ -16,11 +16,11 @@ const testimonials = [
     },
     {
         user: users[0], // Alice Grey
-        quote: "I always felt terrible about the food waste from my small cafe. Now, I can list my surplus in minutes, and it gets picked up by people who need it. Waste2Worth is brilliant!",
+        quote: "I always felt terrible about the food waste from my small cafe. Now, I can list my surplus in minutes, and it gets picked up by people who need it. Food Waste Management System is brilliant!",
     },
     {
         user: users[5], // Nourish Now
-        quote: "Finding consistent, quality food sources was a constant struggle. Waste2Worth has connected us with local businesses, providing nutritious food for our clients.",
+        quote: "Finding consistent, quality food sources was a constant struggle. Food Waste Management System has connected us with local businesses, providing nutritious food for our clients.",
     },
     {
         user: users[6], // George's Grill

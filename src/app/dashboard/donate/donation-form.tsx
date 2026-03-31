@@ -92,13 +92,7 @@ export function DonationForm() {
   };
 
   const resetForm = () => {
-    formRef.current?.reset();
-    setPhotoPreview(null);
-    setDateCooked(undefined);
-    setPickupTimeStart(undefined);
-    setPickupTimeEnd(undefined);
-    const blankForm = new FormData();
-    formAction(blankForm);
+    window.location.reload();
   };
 
 

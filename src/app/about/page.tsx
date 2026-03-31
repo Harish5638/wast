@@ -28,7 +28,7 @@ export default function AboutPage() {
                     <div className="space-y-4">
                         <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">Our Story</h2>
                         <p className="text-muted-foreground text-lg">
-                            Waste2Worth was born from a simple observation: perfectly good food was being thrown away while people in our community were going hungry.
+                            Food Waste Management System was born from a simple observation: perfectly good food was being thrown away while people in our community were going hungry.
                         </p>
                         <p className="text-muted-foreground text-lg">
                             We saw a broken link in the chain and knew we had to build a bridge. Our mission is to create a simple, community-driven solution to redirect surplus food, nourish lives, and build a more sustainable future.

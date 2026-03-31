@@ -38,7 +38,7 @@ export function MapWithMarker({ donationId }: MapWithMarkerProps) {
         defaultZoom={14}
         gestureHandling={"greedy"}
         disableDefaultUI={true}
-        mapId="waste2worth_map_marker"
+        mapId="food_waste_system_map_marker"
         className="w-full h-full"
       >
         <AdvancedMarker position={position}>

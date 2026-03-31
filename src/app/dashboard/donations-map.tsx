@@ -15,9 +15,9 @@ const getDonationPosition = (donationId: string) => {
   };
 };
 
-export default function DonationsMap() {
+export default function DonationsMap({ donations }: { donations: any[] }) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-  const [selectedDonation, setSelectedDonation] = useState<Donation | null>(null);
+  const [selectedDonation, setSelectedDonation] = useState<any | null>(null);
 
   if (!apiKey) {
     return (
@@ -37,7 +37,7 @@ export default function DonationsMap() {
         defaultZoom={11}
         gestureHandling={"greedy"}
         disableDefaultUI={true}
-        mapId="waste2worth_map"
+        mapId="food_waste_system_map"
         className="w-full h-full"
       >
         {donations.map((donation) => (

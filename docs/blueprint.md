@@ -1,9 +1,9 @@
-# **App Name**: Waste2Worth Exchange
+# **App Name**: Food Waste Management System Exchange
 
 ## Core Features:
 
-- Landing Page: Landing page names Waste2Worth . Here's a user flow diagram of the site and map site. Here on initial site we have navbar (Home, About, Dashboard, role based page: My claim, My Pickups, My donations based on user), Community), login/signup button at the rightmost, logo at the left most) , Landing page, one side name of platform then tagline Turn Surplus Into Hope 
-Donate food, help the community, feed strays, reduce waste. and below it a bottuon to - Donate Food. then below name of site screen as we scroll we have Onboarding How It Works (Add Food, Browse ,Claim, Pickup, Make Impact) with their specific icons for better look. Then we have a footer withleft side summary o fWAste2Worth and right side social links...... ..Now for login/signup page we ask for 3 options/roles for this - Organizations / Receivers 
+- Landing Page: Landing page names Food Waste Management System . Here's a user flow diagram of the site and map site. Here on initial site we have navbar (Home, About, Dashboard, role based page: My claim, My Pickups, My donations based on user), Community), login/signup button at the rightmost, logo at the left most) , Landing page, one side name of platform then tagline Turn Surplus Into Hope 
+Donate food, help the community, feed strays, reduce waste. and below it a bottuon to - Donate Food. then below name of site screen as we scroll we have Onboarding How It Works (Add Food, Browse ,Claim, Pickup, Make Impact) with their specific icons for better look. Then we have a footer withleft side summary o fFood Waste Management System and right side social links...... ..Now for login/signup page we ask for 3 options/roles for this - Organizations / Receivers 
 NGOs, shelters, food banks, etc. (who receive food) Donors / Contributors 
 Individuals or restaurants who donate or list leftover food Volunteers / Transporters 
 People or companies who help move the food

@@ -27,7 +27,7 @@ const faqs = [
     },
     {
         question: "Is there a cost to use the platform?",
-        answer: "No, Waste2Worth Exchange is completely free to use for all donors, organizations, and volunteers. Our mission is to facilitate food rescue, not to create barriers.",
+        answer: "No, Food Waste Management System is completely free to use for all donors, organizations, and volunteers. Our mission is to facilitate food rescue, not to create barriers.",
     }
 ]
 
@@ -40,7 +40,7 @@ export default function HelpPage() {
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">Help & FAQ</h1>
             <p className="mt-4 text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Find answers to common questions about how Waste2Worth works.
+              Find answers to common questions about how the Food Waste Management System works.
             </p>
           </div>
         </section>

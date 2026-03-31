@@ -69,7 +69,7 @@ export function DonationCard({ donation, onClaim, onSchedulePickup }: DonationCa
         </div>
       </CardHeader>
       <CardContent className="p-4 flex-1">
-        <CardTitle className="font-headline text-lg mb-2 leading-tight">{donation.foodType}</CardTitle>
+        <CardTitle className="font-headline text-lg mb-2 leading-tight">{donation.imageHint || donation.foodType}</CardTitle>
         <div className="space-y-2 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <Tag className="w-4 h-4" />

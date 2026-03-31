@@ -14,16 +14,30 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { donations } from "@/lib/placeholder-data";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
+import dbConnect from "@/lib/db";
+import Donation from "@/lib/models/Donation";
+import { redirect } from "next/navigation";
 import { format } from "date-fns";
 import { Package, Leaf, Heart } from "lucide-react";
 
-export default function MyDonationsPage() {
-  const currentUser = useCurrentUser();
-  const myDonations = donations.filter(
-    (d) => d.donor.id === currentUser.id
-  );
+export default async function MyDonationsPage() {
+  const session = await getServerSession(authOptions);
+  const userId = (session?.user as any)?.id;
+  if (!userId) {
+    redirect("/login");
+  }
+
+  await dbConnect();
+  // Fetch from DB, lean() returns plain JS objects
+  const rawDonations = await Donation.find({ donor: userId })
+    .populate("claimedBy", "name")
+    .sort({ createdAt: -1 })
+    .lean();
+
+  // Convert ObjectIds/Dates to strings for client components if necessary, but this is a Server Component.
+  const myDonations = rawDonations as any[];
   
   const totalDonations = myDonations.length;
   const edibleDonations = myDonations.filter(d => d.category === 'Edible').length;
@@ -72,6 +86,7 @@ export default function MyDonationsPage() {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead>Food Name</TableHead>
                 <TableHead>Food Type</TableHead>
                 <TableHead>Date Listed</TableHead>
                 <TableHead>Category</TableHead>
@@ -82,7 +97,8 @@ export default function MyDonationsPage() {
             <TableBody>
               {myDonations.map((donation) => (
                 <TableRow key={donation.id}>
-                  <TableCell className="font-medium">{donation.foodType}</TableCell>
+                  <TableCell className="font-medium">{donation.imageHint || "Untitled"}</TableCell>
+                  <TableCell>{donation.foodType}</TableCell>
                   <TableCell>{format(donation.createdAt, "PPP")}</TableCell>
                   <TableCell>
                     <Badge variant="outline">{donation.category}</Badge>

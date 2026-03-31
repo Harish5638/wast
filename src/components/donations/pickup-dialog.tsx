@@ -100,8 +100,8 @@ export function PickupDialog({ donation, onOpenChange, onSubmit }: PickupDialogP
            <div className="space-y-2">
              <Label>Estimated Pickup Window</Label>
               <div className="grid grid-cols-2 gap-2">
-                <Input id="pickupTimeStart" type="time" required />
-                <Input id="pickupTimeEnd" type="time" required />
+                <Input id="pickupTimeStart" type="text" placeholder="e.g. 09:00 AM" required />
+                <Input id="pickupTimeEnd" type="text" placeholder="e.g. 05:00 PM" required />
               </div>
            </div>
           <Button type="submit" className="w-full">

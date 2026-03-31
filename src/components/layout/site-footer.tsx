@@ -11,7 +11,7 @@ export function SiteFooter() {
             <Link href="/" className="flex items-center justify-center md:justify-start space-x-2 mb-2">
               <Icons.logo className="h-6 w-6 text-primary" />
               <span className="font-bold font-headline text-lg">
-                Waste2Worth Exchange
+                Food Waste Management System
               </span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-sm">
@@ -31,7 +31,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="mt-8 pt-4 border-t text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Waste2Worth Exchange. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Food Waste Management System. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

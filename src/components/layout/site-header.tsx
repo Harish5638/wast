@@ -17,7 +17,7 @@ export function SiteHeader() {
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Icons.logo className="h-6 w-6 text-primary" />
             <span className="font-bold font-headline sm:inline-block">
-              Waste2Worth
+              Food Waste Management System
             </span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">

@@ -1,48 +1,25 @@
-'use client';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
+import dbConnect from "@/lib/db";
+import CommunityPost from "@/lib/models/CommunityPost";
+import { redirect } from "next/navigation";
+import { CommunityClient } from "./community-client";
 
-import { useState } from 'react';
-import { PostCard } from "@/components/community/post-card";
-import { CreatePostForm } from "@/components/community/create-post-form";
-import { communityPosts as initialCommunityPosts } from "@/lib/placeholder-data";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { CommunityPost } from '@/lib/types';
-
-export default function CommunityPage() {
-    const currentUser = useCurrentUser();
-    const [posts, setPosts] = useState<CommunityPost[]>(initialCommunityPosts);
-
-    const handleLike = (postId: string) => {
-        setPosts(posts.map(p => p.id === postId ? {...p, likes: p.likes + 1} : p));
-    }
-    
-    const handleComment = (postId: string) => {
-        alert(`Commenting on post ${postId}... (feature coming soon!)`);
+export default async function CommunityPage() {
+    const session = await getServerSession(authOptions);
+    const userId = (session?.user as any)?.id;
+    if (!userId) {
+        redirect("/login");
     }
 
-    const handlePostCreated = (newPost: { content: string; imageUrl?: string }) => {
-        const post: CommunityPost = {
-            id: `post_${crypto.randomUUID()}`,
-            author: currentUser,
-            createdAt: new Date(),
-            likes: 0,
-            comments: [],
-            ...newPost,
-        };
-        setPosts([post, ...posts]);
-    };
+    await dbConnect();
+    const rawPosts = await CommunityPost.find()
+        .populate("author", "name avatarUrl")
+        .sort({ createdAt: -1 })
+        .lean();
 
-  return (
-    <div className="max-w-3xl mx-auto w-full space-y-6">
-      <CreatePostForm onPostCreated={handlePostCreated} />
+    const posts = JSON.parse(JSON.stringify(rawPosts)).map((p: any) => ({ ...p, id: p._id }));
+    const currentUser = { id: userId, name: session?.user?.name, avatarUrl: "https://picsum.photos/seed/user/100/100" };
 
-      {posts.map((post) => (
-        <PostCard 
-            key={post.id} 
-            post={post}
-            onLike={handleLike}
-            onComment={handleComment}
-        />
-      ))}
-    </div>
-  );
+    return <CommunityClient initialPosts={posts} currentUser={currentUser} />;
 }

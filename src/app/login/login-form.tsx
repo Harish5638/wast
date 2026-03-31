@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { signIn } from "next-auth/react";
 import { HandHeart, Truck, Building } from "lucide-react";
 
 const formSchema = z.object({
@@ -41,19 +42,49 @@ export function LoginForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     if (isSignUp && !values.role) {
       form.setError("role", { message: "Please select a role." });
       return;
     }
     
-    toast({
-      title: "Success!",
-      description: isSignUp
-        ? `Welcome, ${values.email}! Your account has been created as a ${values.role}.`
-        : `Welcome back, ${values.email}!`,
-    });
-    router.push("/dashboard");
+    try {
+      if (isSignUp) {
+        const res = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: values.email, password: values.password, role: values.role }),
+        });
+        if (!res.ok) {
+          const data = await res.json();
+          form.setError("root", { message: data.message || "Registration failed" });
+          return;
+        }
+      }
+      
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+      });
+
+      if (res?.error) {
+        form.setError("root", { message: res.error });
+        return;
+      }
+
+      toast({
+        title: "Success!",
+        description: isSignUp
+          ? `Welcome! Your account has been created.`
+          : `Welcome back!`,
+      });
+      router.push("/dashboard");
+      router.refresh();
+      
+    } catch (error) {
+       form.setError("root", { message: "An unexpected error occurred" });
+    }
   }
 
   const roleOptions = [
@@ -127,6 +158,11 @@ export function LoginForm() {
               </FormItem>
             )}
           />
+        )}
+        {form.formState.errors.root && (
+          <div className="text-sm font-medium text-destructive">
+            {form.formState.errors.root.message}
+          </div>
         )}
         <Button type="submit" className="w-full">
           {isSignUp ? "Sign Up" : "Login"}

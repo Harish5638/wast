@@ -42,7 +42,7 @@ export function DashboardNav() {
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
         >
           <Icons.logo className="h-6 w-6 text-primary" />
-          <span className="font-bold text-lg font-headline">Waste2Worth</span>
+          <span className="font-bold text-lg font-headline">Food Waste System</span>
         </Link>
       {allLinks.map(({ href, label, icon: Icon }) => (
         <Link
