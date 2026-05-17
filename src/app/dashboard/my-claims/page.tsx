@@ -18,7 +18,16 @@ export default async function MyClaimsPage() {
     .sort({ createdAt: -1 })
     .lean();
 
-  const myClaims = JSON.parse(JSON.stringify(rawClaims));
+  const myClaims = rawClaims.map((c: any) => ({
+    ...c,
+    _id: c._id.toString(),
+    id: c._id.toString(),
+    donor: c.donor ? { ...c.donor, _id: c.donor._id.toString() } : null,
+    claimedBy: c.claimedBy ? c.claimedBy.toString() : null,
+    pickedUpBy: c.pickedUpBy ? c.pickedUpBy.toString() : null,
+    createdAt: c.createdAt?.toISOString(),
+    completedAt: c.completedAt?.toISOString(),
+  }));
 
   return <ClaimsClient myClaims={myClaims} />;
 }

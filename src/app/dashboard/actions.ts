@@ -5,6 +5,8 @@ import { authOptions } from "@/lib/auth";
 import dbConnect from "@/lib/db";
 import Donation from "@/lib/models/Donation";
 
+import { revalidatePath } from "next/cache";
+
 export async function claimDonation(donationId: string, destinationAddress: string) {
   const session = await getServerSession(authOptions);
   const userId = (session?.user as any)?.id;
@@ -17,6 +19,7 @@ export async function claimDonation(donationId: string, destinationAddress: stri
       claimedBy: userId,
       destinationAddress
     });
+    revalidatePath("/dashboard");
     return { success: true };
   } catch (error) {
     console.error("Failed to claim donation:", error);
@@ -36,6 +39,7 @@ export async function schedulePickup(donationId: string) {
       pickedUpBy: userId,
       completedAt: new Date()
     });
+    revalidatePath("/dashboard");
     return { success: true };
   } catch (error) {
     console.error("Failed to schedule pickup:", error);

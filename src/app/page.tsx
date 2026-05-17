@@ -70,29 +70,30 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1">
-        <section className="relative py-20 md:py-32 bg-card/50">
-          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+        <section className="relative py-20 md:py-32 bg-card/50 overflow-hidden">
+          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
             <div className="space-y-6 text-center md:text-left">
-              <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">
+              <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary tracking-tight">
                 Food Waste Management System
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground font-medium">
+              <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-2xl">
                 Turn Surplus Into Hope. <br />
                 Donate food, help the community, feed strays, reduce waste.
               </p>
-              <Button asChild size="lg" className="group">
+              <Button asChild size="lg" className="group shadow-lg hover:shadow-primary/20 transition-all">
                 <Link href="/login">
                   Donate Food <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
             </div>
-            <div className="relative h-64 md:h-96 rounded-2xl shadow-2xl overflow-hidden">
+            <div className="relative h-64 md:h-96 rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 delay-300 duration-1000">
                {heroImage && (
                  <Image
                     src={heroImage.imageUrl}
                     alt={heroImage.description}
                     data-ai-hint={heroImage.imageHint}
                     fill
+                    priority
                     className="object-cover"
                  />
                 )}
@@ -100,7 +101,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="how-it-works" className="py-20 md:py-28">
+        <section id="how-it-works" className="py-20 md:py-28 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500 fill-mode-both">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">How It Works</h2>
@@ -126,7 +127,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="impact-tiers" className="py-20 md:py-28 bg-card/50">
+        <section id="impact-tiers" className="py-20 md:py-28 bg-card/50 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700 fill-mode-both">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">Our Impact Tiers</h2>

@@ -14,7 +14,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <div className="mr-4 flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
+          <Link href="/" className="mr-6 flex items-center space-x-2 hover:scale-[1.02] transition-transform duration-300">
             <Icons.logo className="h-6 w-6 text-primary" />
             <span className="font-bold font-headline sm:inline-block">
               Food Waste Management System
@@ -25,7 +25,7 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="transition-colors hover:text-primary"
+                className="relative transition-colors hover:text-primary after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
               >
                 {item.label}
               </Link>

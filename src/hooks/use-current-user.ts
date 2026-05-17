@@ -1,23 +1,21 @@
-import { users } from "@/lib/placeholder-data";
+import { useSession } from "next-auth/react";
 import { User } from "@/lib/types";
 
-// This is a mock hook. In a real app, you would use a proper
-// authentication provider (like Firebase Auth, NextAuth, etc.)
 export const useCurrentUser = (): User => {
-  // We'll cycle through the mock users to simulate different roles.
-  // For a real implementation, you'd fetch the current user's data.
-  // You can change the index to test different user roles:
-  // 0: donor (Alice)
-  // 1: organization (Bella)
-  // 2: volunteer (Charlie)
-  
-  // Set to 1 to show claims, 2 to show pickups, 0 to show donations.
-  // Or cycle through them based on a condition for dynamic testing.
-  const userIndex = 0; 
-  
-  return users[userIndex];
+  const { data: session } = useSession();
+
+  // If no session, return a placeholder or handle in UI
+  // For this project, we assume pages using this are protected/checked
+  return {
+    id: (session?.user as any)?.id || "",
+    name: session?.user?.name || "Guest",
+    email: session?.user?.email || "guest@example.com",
+    avatarUrl: (session?.user as any)?.avatarUrl || "",
+    role: (session?.user as any)?.role || "volunteer",
+  };
 };
 
 export const useUserById = (id: string): User | undefined => {
-    return users.find(u => u.id === id);
+    // This would normally fetch from a cache or DB.
+    return undefined;
 }

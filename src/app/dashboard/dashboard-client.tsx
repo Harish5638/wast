@@ -18,8 +18,13 @@ import {
 } from '@/components/ui/dialog';
 import { List, Map, PlusCircle } from 'lucide-react';
 import DonationsList from './donations-list';
-import DonationsMap from './donations-map';
+import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
+
+const DonationsMap = dynamic(() => import('./donations-map'), {
+  ssr: false,
+  loading: () => <Skeleton className="w-full h-full" />,
+});
 import { DonationForm } from './donate/donation-form';
 import { ClaimDialog } from '@/components/donations/claim-dialog';
 import { PickupDialog } from '@/components/donations/pickup-dialog';

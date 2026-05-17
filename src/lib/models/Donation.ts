@@ -37,4 +37,8 @@ const DonationSchema = new Schema<IDonation>(
   { timestamps: true }
 );
 
+DonationSchema.index({ status: 1 });
+DonationSchema.index({ donor: 1 });
+DonationSchema.index({ createdAt: -1 });
+
 export default mongoose.models.Donation || mongoose.model<IDonation>("Donation", DonationSchema);

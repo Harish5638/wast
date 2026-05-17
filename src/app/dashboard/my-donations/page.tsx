@@ -36,8 +36,20 @@ export default async function MyDonationsPage() {
     .sort({ createdAt: -1 })
     .lean();
 
-  // Convert ObjectIds/Dates to strings for client components if necessary, but this is a Server Component.
-  const myDonations = rawDonations as any[];
+  // Convert ObjectIds/Dates to strings for client components and valid React keys.
+  const myDonations = rawDonations.map((d: any) => ({
+    ...d,
+    _id: d._id.toString(),
+    id: d._id.toString(),
+    donor: d.donor?.toString(),
+    claimedBy: d.claimedBy ? {
+        ...d.claimedBy,
+        _id: d.claimedBy._id.toString(),
+    } : null,
+    pickedUpBy: d.pickedUpBy?.toString(),
+    createdAt: d.createdAt?.toISOString(),
+    completedAt: d.completedAt?.toISOString(),
+  }));
   
   const totalDonations = myDonations.length;
   const edibleDonations = myDonations.filter(d => d.category === 'Edible').length;

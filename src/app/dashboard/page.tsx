@@ -16,9 +16,22 @@ export default async function DashboardPage() {
     const rawDonations = await Donation.find({ status: { $in: ["available", "claimed"] } })
         .populate("donor", "name avatarUrl")
         .sort({ createdAt: -1 })
+        .select("foodType quantity status address imageUrl donor category createdAt claimedBy pickedUpBy")
         .lean();
 
-    const donations = JSON.parse(JSON.stringify(rawDonations)).map((d: any) => ({ ...d, id: d._id }));
+    const donations = rawDonations.map((d: any) => ({
+        ...d,
+        _id: d._id.toString(),
+        id: d._id.toString(),
+        donor: d.donor ? {
+            ...d.donor,
+            _id: d.donor._id.toString(),
+        } : null,
+        claimedBy: d.claimedBy?.toString(),
+        pickedUpBy: d.pickedUpBy?.toString(),
+        createdAt: d.createdAt?.toISOString(),
+    }));
+
     const currentUser = { id: userId, role: (session?.user as any)?.role, name: session?.user?.name };
 
     return <DashboardClient initialDonations={donations} currentUser={currentUser} />;
